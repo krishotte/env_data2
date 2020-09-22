@@ -14,13 +14,15 @@ load_dotenv(dotenv_path=env_path, verbose=True)
 
 from app.Device import Device
 
+if Device.all().count() < 1:
 
-devices = [
-    Device(name='wired'),
-    Device(name='wireless'),
-]
+    devices = [
+        Device(name='wired'),
+        Device(name='wireless'),
+    ]
 
-for device in devices:
-    device.save()
+    for device in devices:
+        device.save()
 
 loaded_devices = Device.order_by('id', 'asc').get()
+print(f' all devices: {loaded_devices.serialize()}')
