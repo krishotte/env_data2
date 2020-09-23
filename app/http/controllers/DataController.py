@@ -98,3 +98,13 @@ class DataController(Controller):
             last2_serialized = ''
 
         return [last1_serialized, last2_serialized]
+
+    def show_device_data(self, request: Request, response: Response):
+        # print(f' device: {request.param('device_id')})
+        data = Device.find(1).datas().order_by('id', 'asc').get()
+        data_serialized = data.serialize()
+        for i in range(len(data)):
+            data_serialized[i]['timestamp'] = data[i].serialize()['timestamp'].isoformat()
+
+        # return response.view('test response')
+        return data_serialized
