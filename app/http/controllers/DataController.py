@@ -81,3 +81,20 @@ class DataController(Controller):
         data_point.save()
 
         return response.view('done')
+
+    def show_last(self, view: View):
+        try:
+            last1 = Device.find(1).datas().order_by('id', 'desc').first()
+            last1_serialized = last1.serialize()
+            last1_serialized['timestamp'] = last1.serialize()['timestamp'].isoformat()
+        except (AttributeError, KeyError):
+            last1_serialized = ''
+
+        try:
+            last2 = Device.find(2).datas().order_by('id', 'desc').first()
+            last2_serialized = last2.serialize()
+            last2_serialized['timestamp'] = last2.serialize()['timestamp'].isoformat()
+        except (AttributeError, KeyError):
+            last2_serialized = ''
+
+        return [last1_serialized, last2_serialized]
