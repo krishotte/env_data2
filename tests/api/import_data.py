@@ -19,7 +19,7 @@ config = {
     'postgres': {
         'driver': 'postgres',
         'host': 'localhost',
-        'database': 'env_data_odroid',
+        'database': environ['DB_DATABASE_TO_IMPORT'],
         'user': environ['DB_USERNAME'],
         'password': environ['DB_PASSWORD'],
         'prefix': '',
