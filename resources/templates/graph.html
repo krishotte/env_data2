@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+div.a {
+  height: 800px;
+  border: 1px solid black;
+}
+
+
+</style>
+<h1>test bokeh embed graph</h1>
+<div class="a">
+    {{ div_|safe }}
+    {{ script_|safe }}
+</div>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.1.min.js"
+        crossorigin="anonymous"></script>
+
+{% endblock %}

@@ -8,6 +8,7 @@ import json
 from app.Device import Device
 from app.Data import Data
 from datetime import datetime
+from app.bokeh.visualizer import get_graph_components
 
 
 class DataController(Controller):
@@ -99,12 +100,17 @@ class DataController(Controller):
 
         return [last1_serialized, last2_serialized]
 
-    def show_device_data(self, request: Request, response: Response):
+    def show_device_data(self, view: View, request: Request, response: Response):
         # print(f' device: {request.param('device_id')})
         data = Device.find(1).datas().order_by('id', 'asc').get()
         data_serialized = data.serialize()
         for i in range(len(data)):
             data_serialized[i]['timestamp'] = data[i].serialize()['timestamp'].isoformat()
 
+        script, div = get_graph_components()
         # return response.view('test response')
+        return view.render('graph', {
+            'div_': div,
+            'script_': script,
+        })
         return data_serialized
