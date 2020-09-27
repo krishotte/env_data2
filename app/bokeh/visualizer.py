@@ -1,7 +1,7 @@
 # to be run from root directory
 
 from bokeh.plotting import figure, ColumnDataSource, show
-from bokeh.models import LinearAxis, Range1d
+from bokeh.models import LinearAxis, Range1d, HoverTool
 from pathlib import Path
 from dotenv import load_dotenv
 import sys
@@ -75,6 +75,17 @@ class Document:
             color='blue',
             y_range_name='hum'
         )
+        hover_tool = HoverTool(
+            tooltips=[
+                ('time', '@timestamps{%Y-%m-%d %H:%M}'),
+                ('humidity', '@humidity{(0.0)}'),
+                ('temp', '@temperature{(0.0)}'),
+            ],
+            formatters={
+                '@timestamps': 'datetime'
+            },
+        )
+        self.graph.add_tools(hover_tool)
 
         try:
             hum_max = max(self.data.data['humidity'])
