@@ -1,19 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'menu.html' %}
 
-{% block content %}
+{% block content_a %}
 <style>
 div.a {
   height: 800px;
   border: 1px solid black;
 }
 
+._nav_padding {
+    padding-top: 4rem;
+}
+
+._bottom_padding {
+    padding-bottom: 1rem;
+}
+
 
 </style>
-<h1>test bokeh embed graph</h1>
-<div class="a">
+
+<div class="container-fluid _nav_padding min-vh-100 _bottom_padding">
     {{ div_|safe }}
     {{ script_|safe }}
 </div>
+
 <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.1.min.js"
         crossorigin="anonymous"></script>
 
