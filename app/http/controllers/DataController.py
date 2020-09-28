@@ -129,3 +129,5 @@ class DataController(Controller):
             'script_': script,
         })
 
+    def show_main(self, view: View):
+        return view.render('main.html')

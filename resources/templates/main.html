@@ -1,0 +1,48 @@
+{% extends 'menu.html' %}
+
+{% block content_a %}
+
+<div class="container-sm _nav_margin">
+    <div class="row">
+        <div class="col-sm">
+            <button class="btn btn-primary btn-lg">Envdata - stat</button>
+        </div>
+        <div class="col-sm">
+            <button class="btn btn-primary btn-lg">Envdata - last</button>
+        </div>
+        <div class="col-sm">
+            <button class="btn btn-primary btn-lg">api endpoints</button>
+        </div>
+    </div>
+
+    <div class="row my-4">
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">view graph</h6>
+                    <h4>wired device</h4>
+                    <div class="btn-group" role="group">
+                        <a href="/envdata/1/1800" class="btn btn-success" role="button">day</a>
+                        <a href="/envdata/1/6000" class="btn btn-success" role="button">week</a>
+                        <a href="/envdata/1/42000" class="btn btn-success" role="button">month</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="text-muted">view graph</h6>
+                    <h4>wireless device</h4>
+                    <div class="btn-group" role="group">
+                        <a href="/envdata/2/900" class="btn btn-success" role="button">day</a>
+                        <a href="/envdata/2/4000" class="btn btn-success" role="button">week</a>
+                        <a href="/envdata/2/21000" class="btn btn-success" role="button">month</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
