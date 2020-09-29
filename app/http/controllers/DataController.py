@@ -131,3 +131,6 @@ class DataController(Controller):
 
     def show_main(self, view: View):
         return view.render('main.html')
+
+    def show_stat(self, response: Response):
+        return response.redirect('/main')
