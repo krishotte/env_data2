@@ -1,0 +1,47 @@
+{% extends 'menu.html' %}
+
+{% block content_a %}
+
+<div class="container-sm _nav_margin">
+    <h3>Environment monitor system stats:</h3>
+
+    {% for index in range(devices|length) %}
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Device: {{ devices[index]['name'] }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>datapoints:</td>
+                    <td>{{ stats[index]['count'] }}</td>
+                </tr>
+                <tr>
+                    <td>last timestamp:</td>
+                    <td>{{ last[index]['timestamp'] }}</td>
+                </tr>
+                <tr>
+                    <td>last temperature:</td>
+                    <td>{{ last[index]['temperature'] }}</td>
+                </tr>
+                <tr>
+                    <td>last humidity:</td>
+                    <td>{{ last[index]['humidity'] }}</td>
+                </tr>
+                <tr>
+                    <td>last pressure:</td>
+                    <td>{{ last[index]['pressure'] }}</td>
+                </tr>
+                <tr>
+                    <td>battery:</td>
+                    <td>{{ last[index]['battery'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+
+</div>
+{% endblock %}

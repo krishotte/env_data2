@@ -134,5 +134,23 @@ class DataController(Controller):
     def show_main(self, view: View):
         return view.render('main.html')
 
-    def show_stat(self, response: Response):
-        return response.redirect('/main')
+    def show_stat(self, view: View, response: Response):
+        devices = Device.all()
+        stats = []
+        last_data = []
+        for device in devices:
+            stats.append(
+                {
+                    'count': Device.find(device.id).datas().count()
+                }
+            )
+            last_data.append(
+                device.datas().order_by('id', 'desc').first().serialize()
+            )
+        print(f' stats: {stats}')
+        print(f' last data: {last_data}')
+        return view.render('stats', {
+            'devices': devices,
+            'stats': stats,
+            'last': last_data,
+        })
