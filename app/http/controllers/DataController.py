@@ -102,9 +102,11 @@ class DataController(Controller):
 
     def show_device_data(self, view: View, request: Request, response: Response):
         # print(f' device: {request.param('device_id')})
-        # data = Device.find(1).datas().order_by('id', 'asc').get()
-        data = Device.find(request.param('device_id')).datas().order_by('id', 'asc').get()
-        data = data[-int(request.param('data_length')):]
+        # data = Device.find(request.param('device_id')).datas().order_by('id', 'asc').get()
+        # data = data[-int(request.param('data_length')):]
+        device_id = request.param('device_id')
+        data_length = int(request.param('data_length'))
+        data = Device.find(device_id).datas().order_by('id', 'desc').take(data_length).get()
 
         data_serialized = data.serialize()
 
