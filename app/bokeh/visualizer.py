@@ -78,8 +78,8 @@ class Document:
         hover_tool = HoverTool(
             tooltips=[
                 ('time', '@timestamps{%Y-%m-%d %H:%M}'),
-                ('humidity', '@humidity{(0.0)}'),
-                ('temp', '@temperature{(0.0)}'),
+                ('humidity', '@humidity{0.0}'),
+                ('temp', '@temperature{0.0}'),
             ],
             formatters={
                 '@timestamps': 'datetime'
