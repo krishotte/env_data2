@@ -131,6 +131,29 @@ class DataController(Controller):
             'script_': script,
         })
 
+    def show_batery_data(self, request: Request, view: View):
+        device_id = request.param('device_id')
+        data_length = int(request.param('data_length'))
+        data = Device.find(device_id).datas().order_by('id', 'desc').take(data_length).get()
+
+        timestamps = [point.timestamp for point in data]
+        temperature = [point.battery for point in data]
+
+        print(f' timestamps: {timestamps}')
+        print(f' battery: {temperature}')
+
+        script, div = get_graph_components({
+            'timestamps': timestamps,
+            'temperature': temperature,
+            'humidity': temperature,
+        })
+
+        return view.render('graph', {
+            'div_': div,
+            'script_': script,
+        })
+
+
     def show_main(self, view: View):
         return view.render('main.html')
 
