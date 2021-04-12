@@ -26,4 +26,11 @@ div.a {
 <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.1.min.js"
         crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+    setInterval(function () {
+        console.log(' reloading page');
+        window.location.reload();
+    }, 30000);
+</script>
+
 {% endblock %}

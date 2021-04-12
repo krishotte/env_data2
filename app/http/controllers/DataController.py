@@ -101,31 +101,20 @@ class DataController(Controller):
         return [last1_serialized, last2_serialized]
 
     def show_device_data(self, view: View, request: Request, response: Response):
-        # print(f' device: {request.param('device_id')})
-        # data = Device.find(request.param('device_id')).datas().order_by('id', 'asc').get()
-        # data = data[-int(request.param('data_length')):]
         device_id = request.param('device_id')
         data_length = int(request.param('data_length'))
         data = Device.find(device_id).datas().order_by('id', 'desc').take(data_length).get()
 
-        data_serialized = data.serialize()
-
-        timestamps = []
-        temperature = []
-        humidity = []
-        for i in range(len(data)):
-            data_serialized[i]['timestamp'] = data[i].serialize()['timestamp'].isoformat()
-            timestamps.append(data[i].timestamp)
-            temperature.append(data[i].temperature)
-            humidity.append(data[i].humidity)
+        timestamps = [point.timestamp for point in data]
+        temperature = [point.temperature for point in data]
+        humidity = [point.humidity for point in data]
 
         script, div = get_graph_components({
             'timestamps': timestamps,
             'temperature': temperature,
             'humidity': humidity,
         })
-        # return response.view('test response')
-        # return data_serialized
+
         return view.render('graph', {
             'div_': div,
             'script_': script,
@@ -152,7 +141,6 @@ class DataController(Controller):
             'div_': div,
             'script_': script,
         })
-
 
     def show_main(self, view: View):
         return view.render('main.html')
